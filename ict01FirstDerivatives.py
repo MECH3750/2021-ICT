@@ -9,16 +9,28 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Define functions and their derivatives
-def xCubed(x):
+def f1(x):
     return x*x*x
 
-def fPrime(x):
+def f2(x):
+    return 3*x*x - 2*x
+
+def f3(x):
+    return np.sin(x)
+
+def f1Prime(x):
     return 3*x*x
 
+def f2Prime(x):
+    return 6*x - 2
+
+def f3Prime(x):
+    return np.cos(x)
+
 # Create arrays for x and f(x)
-h = 0.5
+h = 0.1
 x = np.arange(-5,6,h,dtype=float)
-f = xCubed(x)
+f = f3(x)
 
 # Calculate the forward, backward and central differences
 forwardD = np.empty_like(f)
@@ -31,7 +43,7 @@ centralD = np.empty_like(f)
 centralD[1:-1] = (f[2:]-f[:-2])/(2*h)
 
 # Calculate the error associated with each difference approach
-fd = fPrime(x)
+fd = f3Prime(x)
 errors = np.zeros((3,x.size))
 errors[0,:-1] = (fd[:-1]-forwardD[:-1])
 errors[1,1:] = (fd[1:]-backwardD[1:])
